@@ -1,15 +1,25 @@
 <template>
   <div id="selected-note-view">
     <div class="back-button-and-format-date">
-      <el-button style="margin-right: 50px;" @click="$router.push('/noteslist')">
+      <el-button
+        style="margin-right: 50px;"
+        @click="$router.push('/noteslist')"
+      >
         Voltar para a lista
       </el-button>
+
       <span>
-        <b>criado em: {{ formatNoteCreatedDate($store.state.selectedNote.created_at) }}</b>
+        <b>
+          criado em:
+          {{ formatNoteCreatedDate($store.state.selectedNote.created_at) }}
+        </b>
       </span>
     </div>
+
     <div>
-      <SelectedNoteComponent />
+      <SelectedNoteComponent
+        :selected-note="$store.state.selectedNote"
+      />
     </div>
   </div>
 </template>
@@ -27,6 +37,10 @@
       formatNoteCreatedDate(date) {
         return moment(date).format('DD/MM/yyyy HH:mm:ss')
       }
+    },
+
+    mounted() {
+      this.$store.dispatch('showSelectedNote', this.$route.params.id)
     }
   }
 </script>
