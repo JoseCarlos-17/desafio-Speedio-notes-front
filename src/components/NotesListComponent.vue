@@ -6,7 +6,7 @@
         <i class="el-icon-delete" @click="deleteSelectedNoteMethod(note.id)"></i>
         <i class="el-icon-view" @click="loadSelectedNoteMethod(note.id)"></i>
       </div>
-      <h5>criado em: {{ noteCreatedDate(note.created_at) }}</h5>
+      <h5>criado em: {{ note.created_at }}</h5>
     </el-card>
   </div>
 </template>
@@ -17,8 +17,7 @@
       'notesList',
       'loadSelectedNoteMethod',
       'deleteSelectedNoteMethod',
-      'noteCreatedDate'
-    ]
+    ],
   }
 </script>
 

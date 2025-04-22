@@ -24,7 +24,7 @@
 
     computed: {
       notesList() {
-        return this.$store.state.notesList
+        return this.$store.getters.notesList
       }
     },
 

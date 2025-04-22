@@ -6,17 +6,17 @@
         :notesList="notesList"
         :loadSelectedNoteMethod="toNoteSelectedView"
         :deleteSelectedNoteMethod="deleteSelectedNote"
-        :noteCreatedDate="noteCreatedDate"
       />
     </div>
   </div>
 </template>
 
 <script>
-  import { formatNoteCreatedDate } from '@/utils/formatNoteCreatedDate';
   import NotesListComponent from './NotesListComponent.vue';
 
   export default {
+    name: 'AsideComponent',
+
     components: {
       NotesListComponent
     },
@@ -24,10 +24,6 @@
     props: ['notesList'],
 
     methods: {
-      noteCreatedDate(date) {
-        return formatNoteCreatedDate(date)
-      },
-
       loadSelectedNote(note_id) {
         this.$store.dispatch('showSelectedNote', note_id)
       },
@@ -50,15 +46,13 @@
             type: 'success',
             center: true,
           })
-          setTimeout(() => {
-            this.$router.go(0)
-          }, 2000);
+          setTimeout(() => this.$router.go(0), 2000);
         }).catch(error => error);
       }      
     },
 
     mounted() {
-      this.loadSelectedNote()
+      this.loadSelectedNote
     }
   }
 </script>
