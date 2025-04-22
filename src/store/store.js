@@ -39,7 +39,6 @@ export default new Vuex.Store({
 
     // eslint-disable-next-line
     createNote({ commit },payload) {
-      console.log(payload)
       return API_url.post('/notes', { note: payload })
                     .then(response => response).catch(error => error)
     },

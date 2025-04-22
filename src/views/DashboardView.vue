@@ -4,8 +4,14 @@
       <el-col :span="8">
         <AsideComponent :notesList="notesList"/>
       </el-col>
+
       <el-col :span="16" class="main-dashboard-view">
-        <MainComponent />
+        <MainComponent
+          :selectedNote="$store.getters.selectedNote"
+          :notesList="notesList"
+          :noteCreatedDate="noteCreatedDate"
+          :goToCreateNewNoteFormMethod="goToCreateNewNoteForm"
+        />
       </el-col>
     </el-row>
   </div>
@@ -14,6 +20,7 @@
 <script>
   import MainComponent from '../components/MainComponent'
   import AsideComponent from '../components/AsideComponent.vue'
+  import { formatNoteCreatedDate } from '@/utils/formatNoteCreatedDate';
 
   export default {
     name: 'DashboardView',
@@ -25,12 +32,20 @@
     methods: {
       loadNotesList() {
         return this.$store.dispatch('getNotesList')
-      }
+      },
+
+      noteCreatedDate(date) {
+        return formatNoteCreatedDate(date)
+      },
+
+      goToCreateNewNoteForm(){
+        this.$router.push('/newnote')
+      },
     },
 
     computed: {
       notesList() {
-        return this.$store.state.notesList
+        return this.$store.getters.notesList
       }
     },
 
