@@ -3,15 +3,15 @@
     <el-menu
       class="el-menu-demo"
       mode="horizontal">
-      <el-menu-item>
-        <router-link to="/">Home</router-link>
-      </el-menu-item>
-      <el-menu-item>
-        <router-link to="/newnote">Criar anotação</router-link>
-      </el-menu-item>
-      <el-menu-item>
-        <router-link to="noteslist">Lista de anotações</router-link>
-      </el-menu-item>
+        <el-menu-item>
+          <router-link to="/">Home</router-link>
+        </el-menu-item>
+        <el-menu-item>
+          <router-link to="/newnote">Criar anotação</router-link>
+        </el-menu-item>
+        <el-menu-item>
+          <router-link to="noteslist">Lista de anotações</router-link>
+        </el-menu-item>
     </el-menu>
   </div>
 </template>

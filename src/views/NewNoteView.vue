@@ -1,7 +1,7 @@
 <template>
   <div id="new-note-screen">
     <h1>Nova Anotação</h1>
-    <NewNoteFormComponent />
+    <NewNoteFormComponent @createMethod="createNote" />
   </div>
 </template>
 
@@ -12,6 +12,14 @@
   name: 'App',
   components: {
     NewNoteFormComponent
+  },
+
+  methods: {
+    createNote(note) {
+      this.$store.dispatch('createNote', note)
+      this.$message({ message: 'Anotação criada', type: 'success' });
+      this.$router.push('/noteslist')
+    }
   }
 }
 </script>
