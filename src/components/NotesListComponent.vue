@@ -1,67 +1,28 @@
 <template>
   <div id="note-list-component">
-    <el-card class="box-card" v-for="note in notesList" :key="note.id">
-      <div class="card-text-and-buttons">
-        <h3 class="card-text">{{ note.content }}</h3>
-        <i class="el-icon-delete" @click="deleteSelectedNote(note.id)"></i>
-        <i class="el-icon-view" @click="toNoteSelectedView(note.id)"></i>
-      </div>
-      <h5>criado em: {{ formattedDate(note.created_at) }}</h5>
-    </el-card>
+    <div v-for="note in notesList" :key="note.id">
+      <NoteListItemComponent
+        :noteData="note"
+        :loadSelectedNoteMethod="loadSelectedNoteMethod"
+        :deleteSelectedNoteMethod="deleteSelectedNoteMethod"/>
+    </div>    
   </div>
 </template>
 
 <script>
-import moment from 'moment'
-
+  import NoteListItemComponent from './NoteListItemComponent.vue';
   export default {
-    props: ['notesList'],
+    name: 'NoteListComponent',
 
-    data() {
-      return {
-        dateFormatted: '',
-      }
+    components: {
+      NoteListItemComponent
     },
 
-    methods: {
-      loadSelectedNote(note_id) {
-        this.$store.dispatch('showSelectedNote', note_id)
-      },
-
-      toNoteSelectedView(note_id) {
-        this.$route.fullPath === '/noteslist' ?
-        this.$router.push(`/selectednote/${note_id}`) : this.loadSelectedNote(note_id)
-      },
-
-      deleteSelectedNote(note_id) {
-        this.$confirm('Tem certeza de que deseja excluir esta nota?', {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
-          type: 'warning',
-          center: true
-        }).then(() => {
-            this.$store.dispatch('deleteSelectedNote', note_id)
-            this.$alert("Nota excluída", {
-            showConfirmButton: false,
-            type: 'success',
-            center: true,
-          })
-          setTimeout(() => {
-            this.$router.go(0)
-          }, 2000);
-        }).catch(error => error);
-
-        
-      },
-
-      formattedDate(date) {
-        return moment(date).format("DD/MM/yyyy HH:mm:ss")
-      }
-    },
-
-    mounted() {
-      this.loadSelectedNote()
-    }
+    props: [
+      'notesList',
+      'loadSelectedNoteMethod',
+      'deleteSelectedNoteMethod',
+    ],
   }
 </script>
 

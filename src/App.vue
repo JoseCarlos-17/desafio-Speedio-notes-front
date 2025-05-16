@@ -1,10 +1,8 @@
 <template>
   <el-row id="app">
     <el-col :span="20" :offset="2">
-      <HeaderComponent />
-      <div class="main-content">
-        <router-view />
-      </div>
+      <HeaderComponent :data="menuItens"/>
+      <div class="main-content"><router-view /></div>
     </el-col>
   </el-row>
 </template>
@@ -16,6 +14,16 @@ export default {
   name: 'App',
   components: {
     HeaderComponent
+  },
+  
+  data() {
+    return {
+      menuItens: [
+        { label: 'Home', link: '/' },
+        { label: 'Criar anotação', link: '/newnote' },
+        { label: 'Lista de anotações', link: 'noteslist' },
+      ]
+    }
   }
 }
 </script>

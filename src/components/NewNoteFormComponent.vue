@@ -10,7 +10,7 @@
             v-model="note.content" />
         </el-form-item>
         <el-form-item>
-          <el-button @click="createNote">Enviar</el-button>
+          <el-button @click="send">Enviar</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -18,24 +18,18 @@
 </template>
 
 <script>
-
   export default {
     data() {
       return {
         note: {
           content: ''
-        },
+        }
       }
     },
-
+    
     methods: {
-      createNote() {
-        this.$store.dispatch('createNote', this.note)
-        this.$message({
-          message: 'Anotação criada',
-          type: 'success'
-        });
-        this.$router.push('/noteslist')
+      send() {
+        this.$emit('createMethod', this.note)
       }
     }
   }

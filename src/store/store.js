@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { API_url } from '@/main';
+import formatNoteCreatedDate from '@/utils/formatNoteCreatedDate';
 
 Vue.use(Vuex)
 
@@ -12,7 +13,9 @@ export default new Vuex.Store({
 
   getters: {
     notesList(state) {
-      return state.notesList
+      return state.notesList.map(note => (
+        { ...note, created_at: formatNoteCreatedDate(note.created_at) }
+      ))
     },
 
     selectedNote(state) {
@@ -39,7 +42,6 @@ export default new Vuex.Store({
 
     // eslint-disable-next-line
     createNote({ commit },payload) {
-      console.log(payload)
       return API_url.post('/notes', { note: payload })
                     .then(response => response).catch(error => error)
     },
