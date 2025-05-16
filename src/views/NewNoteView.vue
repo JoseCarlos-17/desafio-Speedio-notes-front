@@ -1,17 +1,18 @@
 <template>
   <div id="new-note-screen">
     <h1>Nova Anotação</h1>
-    <NewNoteFormComponent @createMethod="createNote" />
+    <NoteFormComponent @createMethod="createNote" />
   </div>
 </template>
 
 <script>
-  import NewNoteFormComponent from '../components/NewNoteFormComponent.vue';
+  import NoteFormComponent from '../components/NewNoteFormComponent.vue';
 
   export default {
-  name: 'App',
+  name: 'NewNoteView',
+
   components: {
-    NewNoteFormComponent
+    NoteFormComponent
   },
 
   methods: {

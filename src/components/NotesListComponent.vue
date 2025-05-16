@@ -1,18 +1,23 @@
 <template>
   <div id="note-list-component">
-    <el-card class="box-card" v-for="note in notesList" :key="note.id">
-      <div class="card-text-and-buttons">
-        <h3 class="card-text">{{ note.content }}</h3>
-        <i class="el-icon-delete" @click="deleteSelectedNoteMethod(note.id)"></i>
-        <i class="el-icon-view" @click="loadSelectedNoteMethod(note.id)"></i>
-      </div>
-      <h5>criado em: {{ note.created_at }}</h5>
-    </el-card>
+    <div v-for="note in notesList" :key="note.id">
+      <NoteListItemComponent
+        :noteData="note"
+        :loadSelectedNoteMethod="loadSelectedNoteMethod"
+        :deleteSelectedNoteMethod="deleteSelectedNoteMethod"/>
+    </div>    
   </div>
 </template>
 
 <script>
+  import NoteListItemComponent from './NoteListItemComponent.vue';
   export default {
+    name: 'NoteListComponent',
+
+    components: {
+      NoteListItemComponent
+    },
+
     props: [
       'notesList',
       'loadSelectedNoteMethod',

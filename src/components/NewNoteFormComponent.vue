@@ -23,15 +23,15 @@
       return {
         note: {
           content: ''
-        },
+        }
       }
     },
-
+    
     methods: {
       send() {
         this.$emit('createMethod', this.note)
       }
-    },
+    }
   }
 </script>
 
